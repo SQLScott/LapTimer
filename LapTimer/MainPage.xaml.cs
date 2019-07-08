@@ -46,12 +46,13 @@ namespace LapTimer
 
         private void BtnStop_Click(object sender, RoutedEventArgs e)
         {
-
+            timer.Stop();
         }
 
         private void BtnReset_Click(object sender, RoutedEventArgs e)
         {
-
+            _Counter = 0;
+            txtLapTime.Text = "00:00:00";
         }
 
         private void BtnLapReset_Click(object sender, RoutedEventArgs e)
@@ -60,18 +61,13 @@ namespace LapTimer
             txtLapCount.Text = laps.ToString();
         }
 
-        private void Grid_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             timer.Interval = TimeSpan.FromSeconds(1);
-            //timer.Tick += Timer_Tick;
+            timer.Tick += Timer_Tick;
         }
 
-        public void Timer_Tick(object sender, RoutedEventArgs e)
+        public void Timer_Tick(object sender, object e)
         {
             _Counter += 1;
             txtLapTime.Text = TimeSpan.FromSeconds(_Counter).ToString();
